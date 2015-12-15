@@ -95,7 +95,7 @@ class ViewController: UIViewController {
                 userIsTyping = false
             }
             else {
-                calcDisplay.text = " "
+                calcDisplay.text = brain.errorDescr
             }
         }
     }

@@ -144,10 +144,18 @@ class CalculatorBrain {
         return (nil, ops)
     }
     
+    var errorDescr: String?
+    
     func evaluate() -> Double? {
-        let (result, _) = evaluate(opStack)
         let (resultWithErrors, _) = evaluateAndReportErrors(opStack)
-        print(resultWithErrors)
+        var result: Double? = 0
+        switch resultWithErrors {
+        case Result.Normal(let getRes):
+            result = getRes
+        case Result.Error(let getStr):
+            errorDescr = getStr
+            result = nil
+        }
         return result
     }
     
