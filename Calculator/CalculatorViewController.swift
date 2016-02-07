@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var calcDisplay: UILabel!
     @IBOutlet weak var historyDisplay: UILabel!
@@ -147,6 +147,28 @@ class ViewController: UIViewController {
         }
         displayValue = brain.push("M")
         historyValue = brain.description
+    }
+    
+    private struct CalcSegue {
+        static let ShowGraph = "Show Graph"
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var destination = segue.destinationViewController as UIViewController
+        if let navCon = destination as? UINavigationController {
+            destination = navCon.visibleViewController!
+        }
+        if let gvc = destination as? GraphViewController {
+            if let identifier = segue.identifier {
+                switch identifier {
+                case CalcSegue.ShowGraph:
+                    gvc.title = "Hello"
+                    gvc.brain = brain
+                default:
+                    break
+                }
+            }
+        }
     }
 }
 
