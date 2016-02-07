@@ -30,24 +30,29 @@ class GraphView: UIView {
         let path = UIBezierPath()
         var previousPoint: CGPoint?
         
-        for i in Int(0)...Int(2*axesCenter.x) {
+        for i in 0...Int(2*axesCenter.x) {
+            //Translate and scale x
             let x = (CGFloat(i) - axesCenter.x) / scale
-            let y = dataSource?.getYValueForX(CGFloat(x))
+            //Get y from data source
+            let y = dataSource?.getYValueForX(x)
+            
             if (y != nil) {
-                let point = CGPointMake(CGFloat(i), (axesCenter.y - (y! * scale)))
+                //Scale and traslate y
+                let scaledAntTranslatedY = axesCenter.y - (y! * scale)
+                let point = CGPointMake(CGFloat(i), scaledAntTranslatedY)
+                //If previous point existed, add a line from the previous one to the current one
                 if (previousPoint != nil) {
                     path.addLineToPoint(point)
                 }
+                //Otherwise move to the new point
                 else if (y != nil) {
                     path.moveToPoint(point)
                 }
                 previousPoint = point
             }
         }
-        
         UIColor.blueColor().set()
         path.stroke()
-        
     }
     
     private func align(coordinate: CGFloat) -> CGFloat {

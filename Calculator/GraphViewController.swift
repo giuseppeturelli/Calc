@@ -34,6 +34,7 @@ class GraphViewController: UIViewController, GraphDataSource {
     func getYValueForX(x: CGFloat) -> CGFloat? {
         let aString = "\(x)"
         let resultDouble = brain?.setVariable("M", value: aString)
+        brain?.clearVariables()
         if (resultDouble != nil) {
             return CGFloat(resultDouble!)
         } else {
