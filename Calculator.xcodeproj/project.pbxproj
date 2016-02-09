@@ -17,6 +17,7 @@
 		7AB20E4B1B37469A00975AE1 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB20E4A1B37469A00975AE1 /* CalculatorTests.swift */; };
 		7AC1762B1C1F73BF00C8892D /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC1762A1C1F73BF00C8892D /* AxesDrawer.swift */; };
 		7AC1762D1C20BEAC00C8892D /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC1762C1C20BEAC00C8892D /* GraphViewController.swift */; };
+		7AF825E01C6A9B4D00D1B294 /* DisplayMasterSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF825DF1C6A9B4D00D1B294 /* DisplayMasterSplitViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		7AB20E4A1B37469A00975AE1 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		7AC1762A1C1F73BF00C8892D /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		7AC1762C1C20BEAC00C8892D /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		7AF825DF1C6A9B4D00D1B294 /* DisplayMasterSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayMasterSplitViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			children = (
 				7AB20E341B37469A00975AE1 /* AppDelegate.swift */,
 				7AB20E361B37469A00975AE1 /* CalculatorViewController.swift */,
+				7AF825DF1C6A9B4D00D1B294 /* DisplayMasterSplitViewController.swift */,
 				7AC1762C1C20BEAC00C8892D /* GraphViewController.swift */,
 				7A4448701BBDDC1000F3EB04 /* CalculatorBrain.swift */,
 				7AC1762A1C1F73BF00C8892D /* AxesDrawer.swift */,
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A4448711BBDDC1000F3EB04 /* CalculatorBrain.swift in Sources */,
+				7AF825E01C6A9B4D00D1B294 /* DisplayMasterSplitViewController.swift in Sources */,
 				7AC1762D1C20BEAC00C8892D /* GraphViewController.swift in Sources */,
 				7AC1762B1C1F73BF00C8892D /* AxesDrawer.swift in Sources */,
 				7A1BD3951C2214AB002DF800 /* GraphView.swift in Sources */,
@@ -355,6 +359,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "GT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -366,6 +371,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "GT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

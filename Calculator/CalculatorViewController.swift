@@ -162,7 +162,7 @@ class CalculatorViewController: UIViewController {
             if let identifier = segue.identifier {
                 switch identifier {
                 case CalcSegue.ShowGraph:
-                    gvc.title = "Hello"
+                    gvc.title = brain.description
                     gvc.brain = brain
                 default:
                     break

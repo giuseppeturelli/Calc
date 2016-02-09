@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="r6K-N2-uqb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="r6K-N2-uqb">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Split View Controller-->
+        <!--Display Master Split View Controller-->
         <scene sceneID="dm1-Ha-2ju">
             <objects>
-                <splitViewController id="r6K-N2-uqb" sceneMemberID="viewController">
+                <splitViewController id="r6K-N2-uqb" customClass="DisplayMasterSplitViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="HHM-uu-fB5" kind="relationship" relationship="masterViewController" id="ZpW-H6-g8T"/>
                         <segue destination="2SP-7K-ekN" kind="relationship" relationship="detailViewController" id="DZz-gy-h4y"/>
@@ -504,6 +504,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3Jj-Lv-5Jg"/>
+        <segue reference="DZz-gy-h4y"/>
     </inferredMetricsTieBreakers>
 </document>
