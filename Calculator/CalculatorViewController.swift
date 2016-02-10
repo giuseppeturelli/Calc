@@ -162,7 +162,13 @@ class CalculatorViewController: UIViewController {
             if let identifier = segue.identifier {
                 switch identifier {
                 case CalcSegue.ShowGraph:
-                    gvc.title = brain.description
+                    var title = brain.description
+                    let endIndex = title?.rangeOfString(",", options: NSStringCompareOptions.BackwardsSearch)?.endIndex
+                    if (endIndex != nil) {
+                        let rangeToRemove = Range(start: (title?.startIndex)!, end: endIndex!)
+                        title?.removeRange(rangeToRemove)
+                    }
+                    gvc.title = title
                     gvc.brain = brain
                 default:
                     break
