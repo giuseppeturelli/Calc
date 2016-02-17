@@ -19,26 +19,32 @@ class GraphView: UIView {
     var scale: CGFloat = 50.0 {
         didSet { setNeedsDisplay() } }
     
+    var centerTranslation: CGPoint? = nil {
+        didSet { setNeedsDisplay() } }
+    
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
         // Drawing code
-        let axesCenter = convertPoint(center, fromCoordinateSpace: superview!)
+        if (centerTranslation == nil) {
+            centerTranslation = convertPoint(center, fromCoordinateSpace: superview!)
+        }
+        
         let axesDrawer = AxesDrawer(contentScaleFactor: CGFloat(scale))
-        axesDrawer.drawAxesInRect(rect, origin: axesCenter, pointsPerUnit: scale)
+        axesDrawer.drawAxesInRect(self.bounds, origin: centerTranslation!, pointsPerUnit: scale)
         
         let path = UIBezierPath()
         var previousPoint: CGPoint?
         
-        for i in 0...Int(2*axesCenter.x) {
+        for i in Int(self.bounds.origin.x)...Int(self.bounds.width) {
             //Translate and scale x
-            let x = (CGFloat(i) - axesCenter.x) / scale
+            let x = (CGFloat(i) - centerTranslation!.x) / scale
             //Get y from data source
             let y = dataSource?.getYValueForX(x)
             
             if (y != nil) {
                 //Scale and traslate y
-                let scaledAntTranslatedY = axesCenter.y - (y! * scale)
+                let scaledAntTranslatedY = centerTranslation!.y - (y! * scale)
                 let point = CGPointMake(CGFloat(i), scaledAntTranslatedY)
                 //If previous point existed, add a line from the previous one to the current one
                 if (previousPoint != nil) {
@@ -64,12 +70,11 @@ class GraphView: UIView {
         case UIGestureRecognizerState.Changed: fallthrough
         case UIGestureRecognizerState.Ended:
             let translation = gesture.translationInView(self)
-            self.center.x += translation.x
-            self.center.y += translation.y
+            centerTranslation!.x += translation.x
+            centerTranslation!.y += translation.y
             gesture.setTranslation(CGPointZero, inView: self)
         default: break
         }
-        setNeedsDisplay()
     }
     
     func scale(gesture: UIPinchGestureRecognizer) {
