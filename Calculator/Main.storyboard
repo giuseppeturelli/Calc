@@ -36,7 +36,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="tHk-aS-lMY" appends="YES" id="Gq8-zR-6Da"/>
+                                    <outletCollection property="gestureRecognizers" destination="s0N-GC-quH" appends="YES" id="a1V-2b-U5l"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -55,7 +55,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glO-Ye-Bh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="tHk-aS-lMY"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="s0N-GC-quH">
+                    <connections>
+                        <action selector="tap:" destination="7wd-Vm-jE8" id="EsV-0h-dFW"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="948" y="1137"/>
         </scene>

@@ -93,7 +93,11 @@ class GraphViewController: UIViewController, GraphDataSource {
             gesture.scale = 1
         }
     }
-
+    @IBAction func tap(gesture: UITapGestureRecognizer) {
+        graphView.lastTranslation.x = (gesture.locationInView(graphView).x - graphView.lastCenter!.x)
+        graphView.lastTranslation.y = (gesture.locationInView(graphView).y - graphView.lastCenter!.y)
+    }
+    
     /*
     // MARK: - Navigation
 
