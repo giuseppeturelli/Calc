@@ -16,7 +16,7 @@ class GraphView: UIView {
     
     weak var dataSource: GraphDataSource?
     
-    var scale: CGFloat = 50.0 {
+    var scale: CGFloat? {
         didSet {
             setNeedsDisplay()
             previousPath = nil
@@ -33,14 +33,18 @@ class GraphView: UIView {
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
         // Drawing code
-        if (lastCenter == nil) {
+        if lastCenter == nil {
             lastCenter = convertPoint(center, fromCoordinateSpace: superview!)
         }
         lastCenter!.x += lastTranslation.x
         lastCenter!.y += lastTranslation.y
         
-        let axesDrawer = AxesDrawer(contentScaleFactor: CGFloat(scale))
-        axesDrawer.drawAxesInRect(self.bounds, origin: lastCenter!, pointsPerUnit: scale)
+        if scale == nil {
+            scale = 50.0
+        }
+        
+        let axesDrawer = AxesDrawer(contentScaleFactor: CGFloat(scale!))
+        axesDrawer.drawAxesInRect(self.bounds, origin: lastCenter!, pointsPerUnit: scale!)
         
         var previousPoint: CGPoint?
         
@@ -62,16 +66,16 @@ class GraphView: UIView {
             }
         }
         
-        print("This is the start \(startX) this is the end \(endX)")
+        //print("This is the start \(startX) this is the end \(endX)")
         for i in Int(startX)...Int(endX) {
             //Translate and scale x
-            let x = (CGFloat(i) - lastCenter!.x) / scale
+            let x = (CGFloat(i) - lastCenter!.x) / scale!
             //Get y from data source
             let y = dataSource?.getYValueForX(x)
             
             if (y != nil) {
                 //Scale and traslate y
-                let scaledAntTranslatedY = lastCenter!.y - (y! * scale)
+                let scaledAntTranslatedY = lastCenter!.y - (y! * scale!)
                 let point = CGPointMake(CGFloat(i), scaledAntTranslatedY)
                 //If previous point existed, add a line from the previous one to the current one
                 if (previousPoint != nil) {
@@ -90,23 +94,6 @@ class GraphView: UIView {
     }
     
     private func align(coordinate: CGFloat) -> CGFloat {
-        return round(coordinate * scale) / scale
-    }
-    
-    func pan(gesture: UIPanGestureRecognizer) {
-        switch gesture.state {
-        case UIGestureRecognizerState.Changed: fallthrough
-        case UIGestureRecognizerState.Ended:
-            lastTranslation = gesture.translationInView(self)
-            gesture.setTranslation(CGPointZero, inView: self)
-        default: break
-        }
-    }
-    
-    func scale(gesture: UIPinchGestureRecognizer) {
-        if gesture.state == UIGestureRecognizerState.Changed {
-            scale *= gesture.scale
-            gesture.scale = 1
-        }
+        return round(coordinate * scale!) / scale!
     }
 }
