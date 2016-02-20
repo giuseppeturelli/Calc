@@ -17,34 +17,61 @@ class GraphView: UIView {
     weak var dataSource: GraphDataSource?
     
     var scale: CGFloat = 50.0 {
+        didSet {
+            setNeedsDisplay()
+            previousPath = nil
+        } }
+    
+    var lastTranslation: CGPoint = CGPointZero {
         didSet { setNeedsDisplay() } }
     
-    var centerTranslation: CGPoint? = nil {
-        didSet { setNeedsDisplay() } }
+    var lastCenter: CGPoint? = nil
+    
+    var previousPath: UIBezierPath? = nil
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
         // Drawing code
-        if (centerTranslation == nil) {
-            centerTranslation = convertPoint(center, fromCoordinateSpace: superview!)
+        if (lastCenter == nil) {
+            lastCenter = convertPoint(center, fromCoordinateSpace: superview!)
         }
+        lastCenter!.x += lastTranslation.x
+        lastCenter!.y += lastTranslation.y
         
         let axesDrawer = AxesDrawer(contentScaleFactor: CGFloat(scale))
-        axesDrawer.drawAxesInRect(self.bounds, origin: centerTranslation!, pointsPerUnit: scale)
+        axesDrawer.drawAxesInRect(self.bounds, origin: lastCenter!, pointsPerUnit: scale)
         
-        let path = UIBezierPath()
         var previousPoint: CGPoint?
         
-        for i in Int(self.bounds.origin.x)...Int(self.bounds.width) {
+        var startX: CGFloat = 0.0
+        var endX: CGFloat = self.bounds.width
+        
+        var path = UIBezierPath()
+        if previousPath != nil {
+            path = previousPath!
+            
+            let translation = CGAffineTransformMakeTranslation(lastTranslation.x, lastTranslation.y)
+            path.applyTransform(translation)
+            
+            if lastTranslation.x > 0.0 {
+                endX = lastTranslation.x + 1
+            } else {
+                startX = self.bounds.width + lastTranslation.x - 1
+                //Calculating previousPoint
+            }
+        }
+        
+        print("This is the start \(startX) this is the end \(endX)")
+        for i in Int(startX)...Int(endX) {
             //Translate and scale x
-            let x = (CGFloat(i) - centerTranslation!.x) / scale
+            let x = (CGFloat(i) - lastCenter!.x) / scale
             //Get y from data source
             let y = dataSource?.getYValueForX(x)
             
             if (y != nil) {
                 //Scale and traslate y
-                let scaledAntTranslatedY = centerTranslation!.y - (y! * scale)
+                let scaledAntTranslatedY = lastCenter!.y - (y! * scale)
                 let point = CGPointMake(CGFloat(i), scaledAntTranslatedY)
                 //If previous point existed, add a line from the previous one to the current one
                 if (previousPoint != nil) {
@@ -59,6 +86,7 @@ class GraphView: UIView {
         }
         UIColor.blueColor().set()
         path.stroke()
+        previousPath = path
     }
     
     private func align(coordinate: CGFloat) -> CGFloat {
@@ -69,9 +97,7 @@ class GraphView: UIView {
         switch gesture.state {
         case UIGestureRecognizerState.Changed: fallthrough
         case UIGestureRecognizerState.Ended:
-            let translation = gesture.translationInView(self)
-            centerTranslation!.x += translation.x
-            centerTranslation!.y += translation.y
+            lastTranslation = gesture.translationInView(self)
             gesture.setTranslation(CGPointZero, inView: self)
         default: break
         }
