@@ -17,7 +17,7 @@ class GraphView: UIView {
     weak var dataSource: GraphDataSource?
     
     var scale: CGFloat? = 50.0 {
-        didSet { setNeedsDisplay(); previousPath = nil } }
+        didSet { setNeedsDisplay(); previousPath = nil; minY = nil; maxY = nil } }
     
     var translation: CGPoint? = nil {
         didSet { setNeedsDisplay() } }
@@ -26,6 +26,9 @@ class GraphView: UIView {
         didSet { setNeedsDisplay() } }
     
     var lastCenter: CGPoint? = nil
+    
+    var minY: CGFloat? = nil
+    var maxY: CGFloat? = nil
     
     private var relativeCenterPerc: CGPoint? = nil
     private var previousPath: UIBezierPath? = nil
@@ -76,7 +79,7 @@ class GraphView: UIView {
 //            requestedCenter = nextCenter!
 //        }
         
-        print("Requested center X: \(requestedCenter.x) Y: \(requestedCenter.y)")
+        //  print("Requested center X: \(requestedCenter.x) Y: \(requestedCenter.y)")
         
         let axesDrawer = AxesDrawer(contentScaleFactor: CGFloat(scale!))
         axesDrawer.drawAxesInRect(self.bounds, origin: requestedCenter, pointsPerUnit: scale!)
@@ -87,6 +90,21 @@ class GraphView: UIView {
             let x = (CGFloat(i) - requestedCenter.x) / scale!
             //Get y from data source
             let y = dataSource?.getYValueForX(x)
+            if let tempY = minY {
+                if tempY > y {
+                    minY = y
+                }
+            } else {
+                minY = y
+            }
+            
+            if let tempY = maxY {
+                if tempY < y {
+                    maxY = y
+                }
+            } else {
+                maxY = y
+            }
             
             if (y != nil) {
                 //Scale and traslate y

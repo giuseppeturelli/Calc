@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7A1BD3951C2214AB002DF800 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1BD3941C2214AB002DF800 /* GraphView.swift */; };
 		7A1BD3971C222073002DF800 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A1BD3961C222073002DF800 /* Main.storyboard */; };
+		7A2B80071C7A20AF002176E6 /* PopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2B80061C7A20AF002176E6 /* PopOverViewController.swift */; };
 		7A4448711BBDDC1000F3EB04 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4448701BBDDC1000F3EB04 /* CalculatorBrain.swift */; };
 		7AB20E351B37469A00975AE1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB20E341B37469A00975AE1 /* AppDelegate.swift */; };
 		7AB20E371B37469A00975AE1 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB20E361B37469A00975AE1 /* CalculatorViewController.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		7A1BD3941C2214AB002DF800 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		7A1BD3961C222073002DF800 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7A2B80061C7A20AF002176E6 /* PopOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopOverViewController.swift; sourceTree = "<group>"; };
 		7A4448701BBDDC1000F3EB04 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		7AB20E2F1B37469A00975AE1 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB20E331B37469A00975AE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				7AC1762A1C1F73BF00C8892D /* AxesDrawer.swift */,
 				7A1BD3941C2214AB002DF800 /* GraphView.swift */,
 				7A1BD3961C222073002DF800 /* Main.storyboard */,
+				7A2B80061C7A20AF002176E6 /* PopOverViewController.swift */,
 				7AB20E3B1B37469A00975AE1 /* Images.xcassets */,
 				7AB20E3D1B37469A00975AE1 /* LaunchScreen.xib */,
 				7AB20E321B37469A00975AE1 /* Supporting Files */,
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A2B80071C7A20AF002176E6 /* PopOverViewController.swift in Sources */,
 				7A4448711BBDDC1000F3EB04 /* CalculatorBrain.swift in Sources */,
 				7AF825E01C6A9B4D00D1B294 /* DisplayMasterSplitViewController.swift in Sources */,
 				7AC1762D1C20BEAC00C8892D /* GraphViewController.swift in Sources */,

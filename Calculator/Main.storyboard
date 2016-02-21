@@ -37,6 +37,7 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="s0N-GC-quH" appends="YES" id="a1V-2b-U5l"/>
+                                    <outletCollection property="gestureRecognizers" destination="yKZ-IM-V60" appends="YES" id="PGP-tx-mSk"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -52,16 +53,60 @@
                     <navigationItem key="navigationItem" title="Graph" id="ufE-eB-vsU"/>
                     <connections>
                         <outlet property="graphView" destination="4cc-1K-2f4" id="eyh-L5-Kwc"/>
+                        <segue destination="zch-Y7-3bE" kind="popoverPresentation" identifier="Graph Details PopOver" popoverAnchorView="4cc-1K-2f4" id="llM-1k-eaG">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="glO-Ye-Bh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer numberOfTapsRequired="2" id="s0N-GC-quH">
                     <connections>
-                        <action selector="tap:" destination="7wd-Vm-jE8" id="EsV-0h-dFW"/>
+                        <action selector="doubleTap:" destination="7wd-Vm-jE8" id="Yza-Fh-Gcp"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTouchesRequired="2" id="yKZ-IM-V60">
+                    <connections>
+                        <action selector="tap:" destination="7wd-Vm-jE8" id="9Eu-zA-DGz"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="948" y="1137"/>
+        </scene>
+        <!--Pop Over View Controller-->
+        <scene sceneID="D0V-Nu-w8D">
+            <objects>
+                <viewController id="zch-Y7-3bE" customClass="PopOverViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IoT-9q-Ydh"/>
+                        <viewControllerLayoutGuide type="bottom" id="eFi-SX-HQl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xmi-j5-xVF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aKL-n2-T3k">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aKL-n2-T3k" secondAttribute="trailing" id="NNI-X9-Nro"/>
+                            <constraint firstItem="aKL-n2-T3k" firstAttribute="top" secondItem="xmi-j5-xVF" secondAttribute="top" id="PFu-IQ-HHT"/>
+                            <constraint firstItem="aKL-n2-T3k" firstAttribute="leading" secondItem="xmi-j5-xVF" secondAttribute="leading" id="Zs9-53-K4y"/>
+                            <constraint firstItem="aKL-n2-T3k" firstAttribute="bottom" secondItem="eFi-SX-HQl" secondAttribute="top" id="zeO-UG-9sf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="aKL-n2-T3k" id="Dq0-Au-L31"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tdQ-o5-kjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1742" y="1137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="P2V-l1-LOp">

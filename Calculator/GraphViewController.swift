@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GraphViewController: UIViewController, GraphDataSource {
+class GraphViewController: UIViewController, GraphDataSource, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var graphView: GraphView! {
         didSet {
@@ -28,7 +28,10 @@ class GraphViewController: UIViewController, GraphDataSource {
         static let OriginXKey = "GraphViewController.OriginX"
         static let OriginYKey = "GraphViewController.OriginY"
         static let ScaleKey = "GraphViewController.Scale"
+        static let PopOverIdentifier = "Graph Details PopOver"
     }
+    
+    private var pointTouched: CGPoint = CGPointZero
     
     var origin: CGPoint? {
         get {
@@ -99,18 +102,43 @@ class GraphViewController: UIViewController, GraphDataSource {
         }
     }
     
-    func tap(gesture: UITapGestureRecognizer) {
+    
+    @IBAction func tap(gesture: UITapGestureRecognizer) {
+        pointTouched = gesture.locationInView(graphView)
+        performSegueWithIdentifier(DefaultsString.PopOverIdentifier, sender: self)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
+    
+    
+    @IBAction func doubleTap(gesture: UITapGestureRecognizer) {
         graphView.nextCenter = gesture.locationInView(graphView)
     }
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let identifier = segue.identifier {
+            switch identifier {
+            case DefaultsString.PopOverIdentifier:
+                if let pvc = segue.destinationViewController as? PopOverViewController {
+                    if let ppc = pvc.popoverPresentationController {
+                        ppc.delegate = self
+                        ppc.sourceView = graphView
+                        ppc.sourceRect = CGRectMake(pointTouched.x, pointTouched.y, 0, 20)
+                    }
+                    pvc.text = "MinY: \(graphView.minY) MaxY: \(graphView.maxY)\nThis is the point you touched\n X:\(pointTouched.x) Y:\(pointTouched.y)"
+                }
+            default:
+                break
+            }
+        }
     }
-    */
 
 }
