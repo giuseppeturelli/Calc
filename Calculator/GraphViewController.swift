@@ -15,7 +15,7 @@ class GraphViewController: UIViewController, GraphDataSource {
             graphView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "pan:"))
             graphView.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "scale:"))
             graphView.dataSource = self
-            graphView.lastCenter = origin
+            graphView.nextCenter = origin
             graphView.scale = scale
         }
     }
@@ -58,6 +58,12 @@ class GraphViewController: UIViewController, GraphDataSource {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        origin = graphView.lastCenter
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,9 +85,8 @@ class GraphViewController: UIViewController, GraphDataSource {
         switch gesture.state {
         case UIGestureRecognizerState.Changed: fallthrough
         case UIGestureRecognizerState.Ended:
-            graphView.lastTranslation = gesture.translationInView(graphView)
+            graphView.translation = gesture.translationInView(graphView)
             gesture.setTranslation(CGPointZero, inView: graphView)
-            origin = graphView.lastCenter!
         default: break
         }
     }
@@ -93,9 +98,9 @@ class GraphViewController: UIViewController, GraphDataSource {
             gesture.scale = 1
         }
     }
-    @IBAction func tap(gesture: UITapGestureRecognizer) {
-        graphView.lastTranslation.x = (gesture.locationInView(graphView).x - graphView.lastCenter!.x)
-        graphView.lastTranslation.y = (gesture.locationInView(graphView).y - graphView.lastCenter!.y)
+    
+    func tap(gesture: UITapGestureRecognizer) {
+        graphView.nextCenter = gesture.locationInView(graphView)
     }
     
     /*
