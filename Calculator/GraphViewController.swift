@@ -12,8 +12,8 @@ class GraphViewController: UIViewController, GraphDataSource, UIPopoverPresentat
 
     @IBOutlet weak var graphView: GraphView! {
         didSet {
-            graphView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: "pan:"))
-            graphView.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: "scale:"))
+            graphView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(GraphViewController.pan(_:))))
+            graphView.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(GraphViewController.scale(_:))))
             graphView.dataSource = self
             graphView.nextCenter = origin
             graphView.scale = scale

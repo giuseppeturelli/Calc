@@ -165,7 +165,7 @@ class CalculatorViewController: UIViewController {
                     var title = brain.description
                     let endIndex = title?.rangeOfString(",", options: NSStringCompareOptions.BackwardsSearch)?.endIndex
                     if (endIndex != nil) {
-                        let rangeToRemove = Range(start: (title?.startIndex)!, end: endIndex!)
+                        let rangeToRemove = Range((title?.startIndex)! ..< endIndex!)
                         title?.removeRange(rangeToRemove)
                     }
                     gvc.title = title
